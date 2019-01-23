@@ -1,0 +1,37 @@
+#! /bin/bash
+
+usage() {
+    echo Usage: ./$(basename $0) \[source\] \[destination\]
+}
+
+if [[ $1 == -h || $1 == --help ]]; then
+  usage
+  exit 0
+fi
+
+if [[ $# -eq 0 ]]; then
+    vol=$(pwd)/shared:/home/arsenal/shared
+elif [[ $# -eq 1 ]]; then
+    vol=$1:/home/arsenal/$(basename $1)
+elif [[ $# -eq 2 ]]; then
+    vol=$1:/home/arsenal/$2
+else
+    usage
+    exit 1
+fi
+
+## GUI Support (https://stackoverflow.com/a/25280523)
+
+XSOCK=/tmp/.X11-unix
+XAUTH=/tmp/.docker.xauth
+touch $XAUTH
+xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+
+
+docker run -it --rm -h arsenal --name arsenal \
+    -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH \
+    -v $vol \
+    -p 8080:8080 \
+    --env="DISPLAY" \
+    --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
+    arsenal
