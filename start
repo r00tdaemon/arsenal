@@ -1,5 +1,8 @@
 #! /bin/bash
 
+DOCKER_USER=arsenal
+DOCKER_HOME=/home/$DOCKER_USER
+
 usage() {
     echo Usage: ./$(basename $0) \[source\] \[destination\]
 }
@@ -10,28 +13,34 @@ if [[ $1 == -h || $1 == --help ]]; then
 fi
 
 if [[ $# -eq 0 ]]; then
-    vol=$(pwd)/shared:/home/arsenal/shared
+    vol=$(dirname $(readlink -f $0))/shared:$DOCKER_HOME/shared
 elif [[ $# -eq 1 ]]; then
-    vol=$1:/home/arsenal/$(basename $1)
+    vol=$1:$DOCKER_HOME/$(basename $1)
 elif [[ $# -eq 2 ]]; then
-    vol=$1:/home/arsenal/$2
+    vol=$1:$DOCKER_HOME/$2
 else
     usage
     exit 1
 fi
 
 ## GUI Support (https://stackoverflow.com/a/25280523)
-
 XSOCK=/tmp/.X11-unix
 XAUTH=/tmp/.docker.xauth
 touch $XAUTH
 xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 
+## BURP Dir
+burp_dir=$HOME/.java/.userPrefs/burp:$DOCKER_HOME/.java/.userPrefs/burp
+burp_conf=$HOME/.BurpSuite:$DOCKER_HOME/.BurpSuite
 
+## -u flag = https://github.com/moby/moby/issues/3206#issuecomment-152682860
 docker run -it --rm -h arsenal --name arsenal \
+    -u $(id -u):$(id -g) \
     -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH \
     -v $vol \
+    -v $burp_dir -v $burp_conf \
     -p 8080:8080 \
     --env="DISPLAY" \
     --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
     arsenal
+
