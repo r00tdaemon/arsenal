@@ -35,8 +35,7 @@ WORKDIR /home/arsenal/tools
 RUN wget -O ./burp.jar 'https://portswigger.net/DownloadUpdate.ashx?Product=Free' \
     && chmod +x ./burp.jar
 RUN echo "#! /bin/bash \n\
-java -jar /home/arsenal/tools/burp.jar --config-file=shared/burp/burpprojconf.json --user-config-file=shared/burp/burpusrconf.json \
-> /dev/null 2>&1 & \n" > bin/burpsuite \
+java -jar /home/arsenal/tools/burp.jar > /dev/null 2>&1 & \n" > bin/burpsuite \
     && chmod +x bin/burpsuite
 
 ### Install Xmind ###
