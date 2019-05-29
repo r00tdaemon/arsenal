@@ -31,11 +31,19 @@ RUN echo "export PATH=/home/arsenal/tools/bin:$PATH" >> /home/arsenal/.zshrc
 
 WORKDIR /home/arsenal/tools
 
+### Install Burpsuite ###
 RUN wget -O ./burp.jar 'https://portswigger.net/DownloadUpdate.ashx?Product=Free' \
     && chmod +x ./burp.jar
 RUN echo "#! /bin/bash \n\
-java -jar /home/arsenal/tools/burp.jar > /dev/null 2>&1 & \n" > bin/burpsuite \
+java -jar /home/arsenal/tools/burp.jar --config-file=shared/burp/burpprojconf.json --user-config-file=shared/burp/burpusrconf.json \
+> /dev/null 2>&1 & \n" > bin/burpsuite \
     && chmod +x bin/burpsuite
 
+### Install Xmind ###
+RUN wget -O xmind.deb 'https://dl3.xmind.net/XMind-ZEN-for-Linux-64bit.deb' \
+    && sudo apt-get -y install ./xmind.deb \
+    && rm -f xmind.deb
+
+RUN sudo apt-get clean
 WORKDIR /home/arsenal
 CMD ["zsh", "-i"]
