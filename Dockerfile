@@ -42,6 +42,9 @@ java -jar /home/arsenal/tools/burp.jar > /dev/null 2>&1 & \n" > bin/burpsuite \
 RUN wget -O xmind.deb 'https://dl3.xmind.net/XMind-ZEN-for-Linux-64bit.deb' \
     && sudo apt-get -y install ./xmind.deb \
     && rm -f xmind.deb
+RUN echo "#! /bin/bash \n\
+XMind > /dev/null 2>&1 & \n" > bin/xmind \
+    && chmod +x bin/xmind
 
 RUN sudo apt-get clean
 WORKDIR /home/arsenal
