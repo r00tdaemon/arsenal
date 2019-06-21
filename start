@@ -33,12 +33,16 @@ xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 burp_dir=$ARSENAL_DIR/_data/.java/.userPrefs/burp:$DOCKER_HOME/.java/.userPrefs/burp
 burp_conf=$ARSENAL_DIR/_data/.BurpSuite:$DOCKER_HOME/.BurpSuite
 
+## Ghidra Dir
+ghidra_dir=$ARSENAL_DIR/_data/.ghidra:$DOCKER_HOME/.ghidra
+
 ## -u flag = https://github.com/moby/moby/issues/3206#issuecomment-152682860
 docker run -it --rm -h arsenal --name arsenal \
     -u $(id -u):$(id -g) \
     -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH \
     -v $vol \
     -v $burp_dir -v $burp_conf \
+    -v $ghidra_dir \
     -p 8080:8080 \
     --env="DISPLAY" \
     --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \

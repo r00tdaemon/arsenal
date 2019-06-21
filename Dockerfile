@@ -38,6 +38,9 @@ RUN . scripts/burpsuite/install
 ### Install Xmind ###
 RUN . scripts/xmind/install
 
+### Install Ghidra ###
+RUN . scripts/ghidra/install
+
 RUN sudo apt-get clean
 WORKDIR /home/arsenal
 CMD ["zsh", "-i"]
