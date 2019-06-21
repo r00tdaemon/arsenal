@@ -1,7 +1,7 @@
 #! /bin/bash
 
-DOCKER_USER=arsenal
-DOCKER_HOME=/home/$DOCKER_USER
+DOCKER_HOME=/home/arsenal
+ARSENAL_DIR=$(dirname $(readlink -f $0))
 
 usage() {
     echo Usage: ./$(basename $0) \[source\] \[destination\]
@@ -13,7 +13,7 @@ if [[ $1 == -h || $1 == --help ]]; then
 fi
 
 if [[ $# -eq 0 ]]; then
-    vol=$(dirname $(readlink -f $0))/shared:$DOCKER_HOME/shared
+    vol=$ARSENAL_DIR/shared:$DOCKER_HOME/shared
 elif [[ $# -eq 1 ]]; then
     vol=$1:$DOCKER_HOME/$(basename $1)
 elif [[ $# -eq 2 ]]; then
@@ -30,8 +30,8 @@ touch $XAUTH
 xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 
 ## BURP Dir
-burp_dir=$HOME/.java/.userPrefs/burp:$DOCKER_HOME/.java/.userPrefs/burp
-burp_conf=$HOME/.BurpSuite:$DOCKER_HOME/.BurpSuite
+burp_dir=$ARSENAL_DIR/_data/.java/.userPrefs/burp:$DOCKER_HOME/.java/.userPrefs/burp
+burp_conf=$ARSENAL_DIR/_data/.BurpSuite:$DOCKER_HOME/.BurpSuite
 
 ## -u flag = https://github.com/moby/moby/issues/3206#issuecomment-152682860
 docker run -it --rm -h arsenal --name arsenal \
@@ -42,5 +42,5 @@ docker run -it --rm -h arsenal --name arsenal \
     -p 8080:8080 \
     --env="DISPLAY" \
     --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
-    arsenal
+    arsenal 
 

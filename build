@@ -1,4 +1,4 @@
 #! /bin/bash
 
-docker build -t arsenal -f Dockerfile .
+docker build -t arsenal -f Dockerfile context
 

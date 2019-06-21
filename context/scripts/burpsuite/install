@@ -1,0 +1,6 @@
+wget -O ./burp.jar 'https://portswigger.net/DownloadUpdate.ashx?Product=Free' \
+    && chmod +x ./burp.jar
+
+echo "#! /bin/bash \n\
+java -jar /home/arsenal/tools/burp.jar > /dev/null 2>&1 & \n" > bin/burpsuite \
+    && chmod +x bin/burpsuite

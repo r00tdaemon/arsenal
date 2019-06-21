@@ -3,7 +3,7 @@ FROM debian
 RUN apt-get update && apt-get -y install locales
 
 RUN apt-get update \
-    && apt-get -y install vim curl wget git zsh \
+    && apt-get -y install vim curl wget git zsh unzip\
     man sudo locate build-essential
 
 RUN apt-get -y install python-dev python-pip \
@@ -30,21 +30,13 @@ RUN wget -O /home/arsenal/.zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zs
 RUN echo "export PATH=/home/arsenal/tools/bin:$PATH" >> /home/arsenal/.zshrc
 
 WORKDIR /home/arsenal/tools
+COPY ./scripts ./scripts
 
 ### Install Burpsuite ###
-RUN wget -O ./burp.jar 'https://portswigger.net/DownloadUpdate.ashx?Product=Free' \
-    && chmod +x ./burp.jar
-RUN echo "#! /bin/bash \n\
-java -jar /home/arsenal/tools/burp.jar > /dev/null 2>&1 & \n" > bin/burpsuite \
-    && chmod +x bin/burpsuite
+RUN . scripts/burpsuite/install
 
 ### Install Xmind ###
-RUN wget -O xmind.deb 'https://dl3.xmind.net/XMind-ZEN-for-Linux-64bit.deb' \
-    && sudo apt-get -y install ./xmind.deb \
-    && rm -f xmind.deb
-RUN echo "#! /bin/bash \n\
-XMind > /dev/null 2>&1 & \n" > bin/xmind \
-    && chmod +x bin/xmind
+RUN . scripts/xmind/install
 
 RUN sudo apt-get clean
 WORKDIR /home/arsenal
