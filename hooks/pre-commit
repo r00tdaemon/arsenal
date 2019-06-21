@@ -1,0 +1,6 @@
+#! /bin/bash
+
+if [[ $(git rev-parse --abbrev-ref HEAD) == dev ]]; then
+    sed -i 's/ arsenal-dev / arsenal /g' start build
+    git add start build
+fi
