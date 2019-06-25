@@ -41,8 +41,7 @@ docker run -it --rm -h arsenal --name arsenal \
     -u $(id -u):$(id -g) \
     -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH \
     -v $vol \
-    -v $burp_dir -v $burp_conf \
-    -v $ghidra_dir \
+    -v $ARSENAL_DIR/_data:$DOCKER_HOME/_data \
     -p 8080:8080 \
     --env="DISPLAY" \
     --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \

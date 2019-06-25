@@ -28,6 +28,11 @@ RUN mkdir -p /home/arsenal/tools/bin
 
 RUN wget -O /home/arsenal/.zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 RUN echo "export PATH=/home/arsenal/tools/bin:$PATH" >> /home/arsenal/.zshrc
+# Create Dirs for symlinks
+RUN echo "find _data -name .gitignore -exec dirname '{}' \; | xargs -n1 | sed 's/_data\///' | xargs -n1 -I{} sh -c 'mkdir -p \$(dirname ~/{});'" >> /home/arsenal/.zshrc
+# Symlink config dirs
+RUN echo "find _data -name .gitignore -exec dirname '{}' \; | xargs -n1 | sed 's/_data\///' | xargs -n1 -I{} ln -sn ~/_data/{} ~/{}" >> /home/arsenal/.zshrc
+
 
 WORKDIR /home/arsenal/tools
 COPY ./scripts ./scripts
