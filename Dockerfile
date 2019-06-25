@@ -46,6 +46,9 @@ RUN . scripts/xmind/install
 ### Install Ghidra ###
 RUN . scripts/ghidra/install
 
+### Install Amass ###
+RUN . scripts/amass/install
+
 RUN sudo apt-get clean
 WORKDIR /home/arsenal
 CMD ["zsh", "-i"]
