@@ -3,5 +3,7 @@
 # https://stackoverflow.com/a/1418022
 if [[ $3 -eq 1 && $(git rev-parse --abbrev-ref HEAD) == dev ]]; then
     sed -i 's/ arsenal / arsenal-dev /g' start build
+elif [[ $3 -eq 1 && $(git rev-parse --abbrev-ref HEAD) != dev ]]; then
+    sed -i 's/ arsenal-dev / arsenal /g' start build
 fi
 
