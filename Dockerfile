@@ -37,6 +37,12 @@ RUN echo "find _data -name .gitignore -exec dirname '{}' \; | xargs -n1 | sed 's
 WORKDIR /home/arsenal/tools
 COPY ./scripts ./scripts
 
+### Install Golang ###
+RUN . scripts/go/install
+# https://github.com/moby/moby/issues/28971
+ENV GOPATH=/home/arsenal/goProjects
+ENV PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
 ### Install Burpsuite ###
 RUN . scripts/burpsuite/install
 
@@ -48,6 +54,9 @@ RUN . scripts/ghidra/install
 
 ### Install Amass ###
 RUN . scripts/amass/install
+
+### Install Subfinder ###
+RUN . scripts/subfinder/install
 
 RUN sudo apt-get clean
 WORKDIR /home/arsenal
