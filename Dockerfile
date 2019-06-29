@@ -18,6 +18,8 @@ RUN dpkg --add-architecture i386 \
     && apt-get update \
     && apt-get -y install libc6-dbg libc6-dbg:i386 libc6:i386 libncurses5:i386 libstdc++6:i386
 
+RUN apt-get -y install nmap libpcap-dev
+
 RUN useradd -m arsenal
 RUN echo "arsenal ALL=NOPASSWD: ALL" > /etc/sudoers.d/arsenal
 RUN chsh -s /usr/bin/zsh arsenal
@@ -29,9 +31,11 @@ RUN mkdir -p /home/arsenal/tools/bin
 RUN wget -O /home/arsenal/.zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 RUN echo "export PATH=/home/arsenal/tools/bin:$PATH" >> /home/arsenal/.zshrc
 # Create Dirs for symlinks
-RUN echo "find _data -name .gitignore -exec dirname '{}' \; | xargs -n1 | sed 's/_data\///' | xargs -n1 -I{} sh -c 'mkdir -p \$(dirname ~/{});'" >> /home/arsenal/.zshrc
+RUN echo "find _data -name .gitignore -exec dirname '{}' \; | xargs -n1 | sed 's/_data\///' \
+| xargs -n1 -I{} sh -c 'mkdir -p \$(dirname ~/{});'" >> /home/arsenal/.zshrc
 # Symlink config dirs
-RUN echo "find _data -name .gitignore -exec dirname '{}' \; | xargs -n1 | sed 's/_data\///' | xargs -n1 -I{} ln -sn ~/_data/{} ~/{}" >> /home/arsenal/.zshrc
+RUN echo "find _data -name .gitignore -exec dirname '{}' \; | xargs -n1 | sed 's/_data\///' \
+| xargs -n1 -I{} ln -sn ~/_data/{} ~/{} 2>/dev/null" >> /home/arsenal/.zshrc
 
 
 WORKDIR /home/arsenal/tools
@@ -57,6 +61,21 @@ RUN . scripts/amass/install
 
 ### Install Subfinder ###
 RUN . scripts/subfinder/install
+
+### Install Assetfinder ###
+RUN . scripts/assetfinder/install
+
+### Install Dirsearch ###
+RUN . scripts/dirsearch/install
+
+### Install Httprobe ###
+RUN . scripts/httprobe/install
+
+### Install Masscan ###
+RUN . scripts/masscan/install
+
+### Install Meg ###
+RUN . scripts/meg/install
 
 RUN sudo apt-get clean
 WORKDIR /home/arsenal

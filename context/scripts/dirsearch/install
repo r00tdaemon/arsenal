@@ -1,0 +1,2 @@
+git clone https://github.com/maurosoria/dirsearch
+ln -s ~/tools/dirsearch/dirsearch.py ~/tools/bin/dirsearch

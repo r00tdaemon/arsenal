@@ -1,0 +1,5 @@
+git clone https://github.com/robertdavidgraham/masscan
+cd masscan
+make -j
+cd ../
+ln -s ~/tools/masscan/bin/masscan ~/tools/bin/masscan
