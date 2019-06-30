@@ -47,35 +47,8 @@ RUN . scripts/go/install
 ENV GOPATH=/home/arsenal/goProjects
 ENV PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
-### Install Burpsuite ###
-RUN . scripts/burpsuite/install
-
-### Install Xmind ###
-RUN . scripts/xmind/install
-
-### Install Ghidra ###
-RUN . scripts/ghidra/install
-
-### Install Amass ###
-RUN . scripts/amass/install
-
-### Install Subfinder ###
-RUN . scripts/subfinder/install
-
-### Install Assetfinder ###
-RUN . scripts/assetfinder/install
-
-### Install Dirsearch ###
-RUN . scripts/dirsearch/install
-
-### Install Httprobe ###
-RUN . scripts/httprobe/install
-
-### Install Masscan ###
-RUN . scripts/masscan/install
-
-### Install Meg ###
-RUN . scripts/meg/install
+### Install all tools ###
+RUN ./scripts/all
 
 RUN sudo apt-get clean
 WORKDIR /home/arsenal
