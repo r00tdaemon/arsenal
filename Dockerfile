@@ -1,5 +1,6 @@
-FROM debian
+FROM debian:stretch
 
+RUN echo "deb http://deb.debian.org/debian stretch-backports main" | tee -a /etc/apt/sources.list
 RUN apt-get update && apt-get -y install locales
 
 RUN apt-get update \
@@ -8,7 +9,7 @@ RUN apt-get update \
 
 RUN apt-get -y install python-dev python-pip \
         python3-dev python3-pip python3-venv \
-        openjdk-8-jdk
+        openjdk-11-jdk
 
 RUN python3 -m pip install --upgrade pip
 RUN python -m pip install --upgrade pip
