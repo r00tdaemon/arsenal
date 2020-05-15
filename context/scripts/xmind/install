@@ -4,7 +4,7 @@ wget -O xmind.deb 'https://dl3.xmind.net/XMind-ZEN-for-Linux-64bit.deb' \
 
 cat > bin/xmind << EOF
 #! /bin/bash
-XMind > /dev/null 2>&1 & \n" > bin/xmind
+XMind > /dev/null 2>&1 &
 EOF
 
 chmod +x bin/xmind

@@ -9,7 +9,7 @@ RUN apt-get update \
 
 RUN apt-get -y install python-dev python-pip \
         python3-dev python3-pip python3-venv \
-        openjdk-11-jdk
+        default-jre openjdk-11-jdk
 
 RUN python3 -m pip install --upgrade pip
 RUN python -m pip install --upgrade pip
