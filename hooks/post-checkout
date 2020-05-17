@@ -2,8 +2,8 @@
 
 # https://stackoverflow.com/a/1418022
 if [[ $3 -eq 1 && $(git rev-parse --abbrev-ref HEAD) == dev ]]; then
-    sed -i 's/ arsenal / arsenal-dev /g' start build
+    sed -i 's/ arsenal / arsenal-dev /g' start build connect
 elif [[ $3 -eq 1 && $(git rev-parse --abbrev-ref HEAD) != dev ]]; then
-    sed -i 's/ arsenal-dev / arsenal /g' start build
+    sed -i 's/ arsenal-dev / arsenal /g' start build connect
 fi
 

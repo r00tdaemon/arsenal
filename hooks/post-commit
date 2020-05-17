@@ -1,5 +1,5 @@
 #! /bin/bash
 
 if [[ $(git rev-parse --abbrev-ref HEAD) == dev ]]; then
-    sed -i 's/ arsenal / arsenal-dev /g' start build
+    sed -i 's/ arsenal / arsenal-dev /g' start build connect
 fi
