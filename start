@@ -42,7 +42,7 @@ docker run -it --rm -h arsenal --name arsenal \
     -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH \
     -v $vol \
     -v $ARSENAL_DIR/_data:$DOCKER_HOME/_data \
-    -p 8080:8080 \
+    --network host \
     --env="DISPLAY" \
     --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
     arsenal 

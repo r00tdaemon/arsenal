@@ -28,6 +28,8 @@ RUN chsh -s /usr/bin/zsh arsenal
 USER arsenal
 RUN mkdir -p /home/arsenal/tools
 RUN mkdir -p /home/arsenal/tools/bin
+RUN mkdir -p /home/arsenal/wordlists
+RUN mkdir -p /home/arsenal/privesc
 
 RUN wget -O /home/arsenal/.zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 RUN echo "export PATH=/home/arsenal/tools/bin:$PATH" >> /home/arsenal/.zshrc

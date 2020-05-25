@@ -1,0 +1,3 @@
+wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+chmod +x LinEnum.sh
+ln -s ~/tools/LinEnum.sh ~/privesc/

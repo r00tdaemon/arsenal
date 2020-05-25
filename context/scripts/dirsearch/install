@@ -1,2 +1,3 @@
 git clone https://github.com/maurosoria/dirsearch
 ln -s ~/tools/dirsearch/dirsearch.py ~/tools/bin/dirsearch
+ln -s ~/tools/dirsearch/db ~/wordlists/dirsearch
