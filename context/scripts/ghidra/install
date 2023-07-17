@@ -1,11 +1,11 @@
-wget https://ghidra-sre.org/ghidra_9.0.4_PUBLIC_20190516.zip -O ghidra.zip
+curl -s https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/latest | grep -i "browser_download_url.*" |  cut -d '"' -f 4| wget -O ghidra.zip -i -
 unzip ghidra.zip
 rm -f ghidra.zip
 
-wget https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_linux-x64_bin.tar.gz -O openjdk.tar.gz
-tar xvf openjdk.tar.gz
-rm -f openjdk.tar.gz
+# wget https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_linux-x64_bin.tar.gz -O openjdk.tar.gz
+# tar xvf openjdk.tar.gz
+# rm -f openjdk.tar.gz
 
-echo "/home/arsenal/tools/jdk-12.0.1" > ~/.ghidra/.ghidra-9.0.4/java_home.save
-
-ln -s ~/tools/ghidra_9.0.4/ghidraRun ~/tools/bin/ghidra
+# echo "/home/arsenal/tools/jdk-12.0.1" > ~/.ghidra/.ghidra-9.0.4/java_home.save
+mv $(find -maxdepth 1 -type d -name "ghidra_*") ghidra
+ln -s ~/tools/ghidra/ghidraRun ~/tools/bin/ghidra

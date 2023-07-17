@@ -1,1 +1,1 @@
-go get -u github.com/tomnomnom/meg
+go install github.com/tomnomnom/meg@latest

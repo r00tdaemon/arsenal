@@ -1,2 +1,1 @@
-go get -u github.com/tomnomnom/httprobe
-
+go install github.com/tomnomnom/httprobe@latest

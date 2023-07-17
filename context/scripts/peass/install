@@ -1,5 +1,4 @@
-git clone https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite.git peass
+git clone --depth 1 https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite.git peass
 ln -s ~/tools/peass/linPEAS/linpeas.sh ~/privesc
 ln -s ~/tools/peass/winPEAS/winPEASbat/winPEAS.bat ~/privesc
 ln -s ~/tools/peass/winPEAS/winPEASexe/winPEAS/bin/Release/winPEAS.exe ~/privesc
-

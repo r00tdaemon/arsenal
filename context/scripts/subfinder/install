@@ -1,4 +1,1 @@
-curl -s https://api.github.com/repos/projectdiscovery/subfinder/releases/latest | grep -i "browser_download_url.*linux-amd64"| cut -d '"' -f 4 | wget -O subfinder-linux-amd64.tar -i -
-tar -xzvf subfinder-linux-amd64.tar
-mv subfinder-linux-amd64 $HOME/tools/bin/subfinder
-rm -rf subfinder-linux-amd64.tar
+go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest

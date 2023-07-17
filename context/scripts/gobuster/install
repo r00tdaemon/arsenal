@@ -1,1 +1,1 @@
-go get github.com/OJ/gobuster
+go install github.com/OJ/gobuster@latest

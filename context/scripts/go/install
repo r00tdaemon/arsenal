@@ -1,4 +1,4 @@
-wget https://dl.google.com/go/$(curl https://golang.org/VERSION?m=text).linux-amd64.tar.gz -O go.tar.gz
+wget https://dl.google.com/go/$(curl "https://go.dev/VERSION?m=text").linux-amd64.tar.gz -O go.tar.gz
 tar xvf go.tar.gz
 rm -rf go.tar.gz
 sudo chown -R root:root ./go
@@ -6,4 +6,3 @@ sudo mv go /usr/local
 mkdir ~/goProjects
 echo "export GOPATH=\$HOME/goProjects" >> ~/.zshrc
 echo "export PATH=\$PATH:/usr/local/go/bin:\$GOPATH/bin" >> ~/.zshrc
-

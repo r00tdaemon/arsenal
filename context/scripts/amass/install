@@ -1,6 +1,5 @@
-curl -s https://api.github.com/repos/OWASP/Amass/releases/latest | grep -i "browser_download_url.*linux_amd64" | cut -d '"' -f 4 | wget -O amass.zip -i -
+curl -s https://api.github.com/repos/owasp-amass/amass/releases/latest | grep -i "browser_download_url.*linux_amd64" | cut -d '"' -f 4 | wget -O amass.zip -i -
 unzip amass.zip
 find . -maxdepth 1 -type d -name 'amass*' -exec mv {} amass \;
 ln -s ~/tools/amass/amass ~/tools/bin/amass
 rm -rf amass.zip
-
